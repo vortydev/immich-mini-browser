@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Albums</h2>
+
+<form method="get" style="display:flex; gap:1rem; align-items:center; margin:.25rem 0 1rem;">
+    <label for="include_empty" style="display:flex; align-items:center; gap:.5rem;">
+        <input id="include_empty" name="include_empty" type="checkbox" value="1" role="switch" {% if include_empty
+            %}checked{% endif %} onchange="this.form.submit()">
+        Show empty albums
+    </label>
+    <span class="muted">
+        {{ shown }} of {{ total }} shown{% if hidden %} • {{ hidden }} hidden{% endif %}
+    </span>
+</form>
+
+<div class="grid">
+    {% for a in albums %}
+    <article class="album-card">
+        <a href="/albums/{{ a.id }}/viewer">
+            {% if a.coverAssetId %}
+            <img class="card-img" src="/thumb/album/{{ a.id }}/{{ a.coverAssetId }}?size=preview"
+                alt="{{ a.name }} cover" />
+            {% else %}
+            <div class="card-img" style="display:flex;align-items:center;justify-content:center;background:#eee;">
+                No cover
+            </div>
+            {% endif %}
+        </a>
+        <h3 style="margin:.5rem 0 0;">{{ a.name or 'Untitled Album' }}</h3>
+        <p class="muted">{{ a.assetCount or 0 }} items</p>
+        <a href="/albums/{{ a.id }}/viewer" role="button" class="secondary">Open</a>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

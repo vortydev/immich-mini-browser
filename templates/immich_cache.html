@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/immich_cache.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<h2>Immich Cache</h2>
+<p class="muted">Thumb cache + metadata cache controls.</p>
+
+<article class="box">
+    <header><strong>Stats</strong></header>
+
+    <div id="msg" class="muted mb-2"></div>
+
+    <div class="grid grid-3">
+        <section class="stats-box">
+            <strong>Thumbnails</strong>
+            <div id="statsThumbs" class="stats-grid muted mt-1">
+                <span>Loading...</span>
+            </div>
+        </section>
+
+        <section class="stats-box">
+            <strong>Metadata</strong>
+            <div id="statsMeta" class="stats-grid muted mt-1">
+                <span>Loading...</span>
+            </div>
+        </section>
+
+        <section class="stats-box">
+            <strong>TTL</strong>
+            <div id="statsTtl" class="stats-grid ttl muted mt-1">
+                <span>Loading...</span>
+            </div>
+        </section>
+    </div>
+
+    
+</article>
+
+<article class="box">
+    <header><strong>Thumb cache</strong></header>
+    <div class="form-footer mt-1">
+        <button id="btnClearThumbsAll"
+                type="button"
+                class="secondary js-confirm"
+                data-confirm="Clear ALL cached thumbnails (albums + images)?">
+            Clear thumbs (all)
+        </button>
+
+        <button id="btnClearThumbsAlbums"
+                type="button"
+                class="secondary js-confirm"
+                data-confirm="Clear cached ALBUM cover thumbnails only?">
+            Clear thumbs (albums)
+        </button>
+
+        <button id="btnClearThumbsImages"
+                type="button"
+                class="secondary js-confirm"
+                data-confirm="Clear cached IMAGE thumbnails only?">
+            Clear thumbs (images)
+        </button>
+    </div>
+</article>
+
+<article class="box">
+    <header><strong>Metadata cache</strong></header>
+    <div class="form-footer mt-1">
+        <button id="btnRefreshAlbumsMeta"
+                type="button"
+                class="js-confirm"
+                data-confirm="Re-fetch albums metadata from Immich and overwrite cache?">
+            Refresh albums meta
+        </button>
+
+        <button id="btnClearMeta"
+                type="button"
+                class="secondary js-confirm"
+                data-confirm="Clear ALL Immich metadata cache (albums + per-album assets)?">
+            Clear meta (all)
+        </button>
+    </div>
+</article>
+
+{% endblock %}

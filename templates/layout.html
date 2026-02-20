@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or 'Immich Albums' }}</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block extra_css %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/ui_core.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cookies.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><strong><a href="/">Home</a></strong></li>
+                </ul>
+                <ul>
+                    <li><a href="/albums">Albums</a></li>
+                    <li><a href="/cache">Cache</a></li>
+                </ul>
+            </nav>
+        </header>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

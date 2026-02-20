@@ -1,0 +1,487 @@
+/* static/css/base.css */
+.lowercase {
+    text-transform: lowercase;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem 1rem;
+    transition: 0.2s all ease;
+    border-radius: 1rem;
+}
+
+.grid > * {
+  min-width: 0;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.page-grid {
+    grid-template-columns: 380px 1fr;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.75rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.mb-5 {
+    margin-bottom: 2rem !important;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.mt-1 {
+    margin-top: 0.5rem !important;
+}
+
+.mt-2 {
+    margin-top: 0.75rem !important;
+}
+
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+    margin-top: 2rem !important;
+}
+
+.muted {
+    color: #6b7280;
+    font-size: .9rem;
+}
+
+header {
+    margin: 1rem 0 2rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-img {
+    width: 100%;
+    height: var(--thumb-h, 180px);
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* make the render-form preview *contain* instead of crop */
+.card-img.contain {
+    object-fit: contain;
+    background: #111;
+}
+
+.card-body {
+    margin-top: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.card-body h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.thumb-card {
+    min-width: 0;
+    width: 100%;
+    height: auto;
+}
+
+.album-card .muted,
+.thumb-card .muted {
+    margin-bottom: 0;
+}
+
+.grid .album-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.grid .album-card a[role="button"] {
+    margin-top: auto;
+}
+
+#albums,
+#assets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#albums li,
+#assets li {
+    display: flex;
+    gap: .6rem;
+    padding: .5rem;
+    border-radius: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+
+#albums li:hover,
+#assets li:hover {
+    background: rgba(127, 127, 127, .12);
+}
+
+#albums li.active,
+#assets li.active {
+    outline: 2px solid rgba(127, 127, 255, .45);
+}
+
+.row .meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #222;
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: .8rem;
+}
+
+.list-toolbar {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    margin-bottom: .5rem;
+    flex-direction: column;
+}
+
+.list-toolbar .muted {
+    margin-left: auto;
+}
+
+.list-toolbar>input[type="search"] {
+    margin-bottom: 0.25rem;
+}
+
+/* Center the frame in the dialog */
+.lightbox-article {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+/* Frame shrink-wraps to the image */
+.lightbox-frame {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    max-height: 85vh;
+}
+
+.lightbox-media {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    margin: auto;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+#lightboxVideo {
+    background: #000;
+}
+
+/* Image sizing */
+/* #lightboxImg {
+            display: block;
+            max-width: 100%;
+            max-height: 85vh;
+            display: block;
+            margin: auto;
+            border-radius: 12px;
+        } */
+
+/* Close box now positions relative to the image frame */
+#lightboxCloseBox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    align-items: center;
+    /* default: overlay in the image’s top-right corner */
+    top: 8px;
+    right: 8px;
+}
+
+#lightboxClose {
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.5rem 0.65rem 0.6rem;
+}
+
+/* Hint text */
+#lightboxCloseHint {
+    font-size: 0.75rem;
+}
+
+/* --- Optional variants --- */
+/* Put the close box just OUTSIDE the image on the right edge */
+.lightbox-frame.outside #lightboxCloseBox {
+    top: 0.75rem;
+    right: -0.75rem;
+    transform: translateX(100%);
+}
+
+/* Put it ABOVE the image (centered right edge) */
+/* .lightbox-frame.above #lightboxCloseBox {
+            top: -0.75rem;
+            right: 0;
+            transform: translateX(0);
+        } */
+
+.preview-frame {
+    height: 240px;
+    /* adjust as you like */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111;
+    /* helps letterbox */
+}
+
+.preview-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* full image visible, no crop */
+    object-position: center;
+    display: block;
+    cursor: zoom-in;
+    /* hint: click to open */
+}
+
+.thumb-btn {
+    all: unset;
+    display: block;
+    cursor: zoom-in;
+}
+
+/* optional: keep the card corners matching your theme */
+#previewCard {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+details.box {
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: .5rem;
+}
+
+details.box>summary {
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+}
+
+details.box[open]>summary {
+    margin-bottom: .75rem;
+}
+
+.meta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.meta-grid input {
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+.meta-grid label {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+}
+
+.copy-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .5rem;
+    align-items: center;
+}
+
+.copy-btn.tiny {
+    padding: .35rem .6rem;
+    font-size: .65rem;
+}
+
+button {
+    margin-bottom: 0 !important;
+}
+
+.form-footer {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.panel {
+    max-height: 800px;
+    overflow-y: scroll;
+}
+
+.panel-header {
+    display: flex;
+    align-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 0 !important;
+}
+
+.panel-header-title {
+    min-width: fit-content;
+    max-width: 150px;
+}
+
+.panel-header-search {
+    margin-bottom: 0 !important;
+}
+
+.grid input[type="checkbox"] {
+    margin-top: 0.125rem;
+}
+
+.grid label {
+    margin-bottom: 0 !important;
+}
+
+.form-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
+}
+
+form.page-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-content: flex-start;
+}
+
+.char-list {
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0 0;
+    max-height: 800px;
+    overflow-y: scroll;
+}
+
+/* Stats */
+.stats-box {
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+    border: 0.2rem solid transparent;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0;
+}
+.stats-box:hover {
+    border-color:#7f7fff73;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: .35rem .75rem;
+}
+.stats-grid > .label {
+    opacity: .8;
+}
+.stats-grid > .value {
+    text-align: right;
+    white-space: nowrap;
+}
+.stats-grid > .size {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.stats-grid.ttl {
+    grid-template-columns: auto 1fr;
+}
+
+/* Coven */
+.coven {
+    color: #b658b9;
+}
+
+.coven:hover {
+    color: #e06ee4;
+    text-decoration-color: #e06ee4;
+}
+
+/* Immich */
+#immichPickerShell {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

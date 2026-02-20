@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block extra_js %}
+<meta name="immich-album-id" content="{{ album.id }}">
+<meta name="immich-per-page" content="{{ per_page | int }}">
+<script src="{{ url_for('static', filename='js/immich.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<h2>{{ album.albumName or 'Album' }}</h2>
+
+<!-- Progress Modal -->
+<dialog id="progressModal" open>
+    <article>
+        <header>
+            <strong>Preparing thumbnails...</strong>
+        </header>
+        <progress id="prog" value="0" max="100" style="width:100%"></progress>
+        <p id="progText" class="muted" style="margin:.5rem 0 0;">Starting…</p>
+    </article>
+</dialog>
+
+<!-- Toolbar -->
+<nav style="display:flex; gap:.5rem; align-items:center; margin:.5rem 0 1rem;">
+    <span class="muted" id="count">0 items</span>
+    <div style="display: flex; justify-content: center; gap: 0.75rem; align-items: center;">
+        <span class="muted" style="min-width: fit-content; height: 100%;">per page:</span>
+        <select id="perPage">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+</nav>
+
+<!-- Grid -->
+<div id="grid" class="grid"></div>
+
+<!-- Pagination -->
+<nav id="pager" aria-label="Pagination" style="margin-top:1rem; display:flex; gap:.5rem; align-items:center;">
+    <a role="button" class="secondary" id="firstBtn">&laquo; First</a>
+    <a role="button" class="secondary" id="prevBtn">&lsaquo; Prev</a>
+    <span class="muted" id="pageInfo">Page 1 of 1</span>
+    <a role="button" class="secondary" id="nextBtn">Next &rsaquo;</a>
+    <a role="button" class="secondary" id="lastBtn">Last &raquo;</a>
+</nav>
+
+<!-- Lightbox dialog -->
+{% include 'partials/image_preview.html' %}
+
+{% endblock %}
