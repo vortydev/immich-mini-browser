@@ -58,6 +58,52 @@ def album_viewer(album_id: str):
     per_page = int(request.args.get("per_page", PER_PAGE))
     return render_template("album_viewer.html", album=album, per_page=per_page)
 
+
+@bp.get("/api/albums.json")
+def api_albums():
+    """
+    GET /immich/api/albums.json?include_empty=0|1
+    Returns albums in the shape your FV /api/media/immich/albums expects.
+    """
+    include_empty = str(request.args.get("include_empty", "0")).lower() in ("1", "true", "yes", "on")
+
+    try:
+        albums = client.list_albums() or []
+    except Exception as e:
+        return jsonify({"error": str(e), "items": [], "total": 0}), 502
+
+    enriched = []
+    for a in albums:
+        album_id = a.get("id")
+        cover_id = _album_cover_asset_id(a)
+
+        if not cover_id and album_id:
+            # best-effort: fetch full album to find a cover/first asset
+            try:
+                full = client.get_album(album_id)
+                cover_id = _album_cover_asset_id(full)
+            except Exception:
+                cover_id = None
+
+        enriched.append({
+            "id": album_id,
+            "name": a.get("albumName"),
+            "assetCount": a.get("assetCount") or 0,
+            "coverAssetId": cover_id,
+        })
+
+    shown = enriched if include_empty else [x for x in enriched if (x.get("assetCount") or 0) > 0]
+
+    return jsonify({
+        "items": shown,
+        "total": len(shown),
+        "meta": {
+            "include_empty": include_empty,
+            "total_all": len(enriched),
+            "hidden": max(0, len(enriched) - len(shown)),
+        },
+    })
+
 @bp.get("/api/albums/<album_id>/assets.json")
 def api_album_assets(album_id: str):
     """Returns all assets metadata for an album (no thumbnails)."""

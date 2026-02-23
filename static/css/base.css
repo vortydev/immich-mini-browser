@@ -485,3 +485,8 @@ form.page-form {
     flex-direction: column;
     gap: 1rem;
 }
+
+:where(nav li)::before {
+  float: left;
+  content: "";
+}
