@@ -469,16 +469,6 @@ form.page-form {
     grid-template-columns: auto 1fr;
 }
 
-/* Coven */
-.coven {
-    color: #b658b9;
-}
-
-.coven:hover {
-    color: #e06ee4;
-    text-decoration-color: #e06ee4;
-}
-
 /* Immich */
 #immichPickerShell {
     display: flex;

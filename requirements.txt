@@ -1,0 +1,7 @@
+dotenv
+flask
+# gunicorn
+numpy
+pandas
+pytz
+requests

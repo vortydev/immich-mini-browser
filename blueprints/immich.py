@@ -300,7 +300,7 @@ def api_admin_cache_stats():
         "paths": {"thumbs": str(THUMB_DIR), "meta": str(META_DIR)},
     })
 
-@bp.post("/api/admin/cache/clear-thumbs.json")
+@bp.post("/api/cache/clear-thumbs.json")
 def api_admin_cache_clear_thumbs():
     payload = request.get_json(silent=True) or {}
     kind = (payload.get("kind") or "").strip().lower() or None  # None | albums | images

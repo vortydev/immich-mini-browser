@@ -37,7 +37,7 @@ def run_app(print_app_routes: bool = False):
 
 if __name__ == "__main__":
     try:
-        run_app(print_app_routes=True)
+        run_app(print_app_routes=False)
     except KeyboardInterrupt:
         print("User aborted the program!")
         exit()
