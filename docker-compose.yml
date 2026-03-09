@@ -9,7 +9,7 @@ services:
 
     # Local-only: binds to your host loopback only
     ports:
-      - "127.0.0.1:${FLASK_PORT}:${FLASK_PORT}"
+      - "${FLASK_HOST}:${FLASK_PORT}:${FLASK_PORT}"
 
     volumes:
       - ./data:/app/data
